@@ -45,13 +45,15 @@
 @import url(./blocks/start-page/start-page.css);
 @import url(./blocks/start-page/__title/start-page__title.css);
 @import url(./blocks/start-page/__form/start-page__form.css);
+@import url(./blocks/start-page/__form/_place-login/start-page__form_place-login.css);
 @import url(./blocks/start-page/__input/start-page__input.css);
 @import url(./blocks/start-page/__button/start-page__button.css);
 @import url(./blocks/start-page/__signin/start-page__signin.css);
 @import url(./blocks/start-page/__register-link/start-page__register-link.css);
 @import url(./blocks/popup/__success-registrated/popup__success-registrated.css);
 @import url(./blocks/popup/__title/_place-tooltip/popup__title_place-tooltip.css);
-@import url(./blocks/popup/__image/_tooltip-success/popup__image_tooltip-success.css);
-@import url(./blocks/popup/__image/_tooltip-fail/popup__image_tooltip-fail.css);
+@import url(./blocks/popup/__image/_tooltip-place/popup__image_tooltip-place.css);
 @import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__link-exit/header__link-exit.css);
 @import url(./blocks/header/__user-data/header__user-data.css);
+/* @import url(./blocks/popup/__content/_place-infoTool/popup__content_place-infoTool.css); */

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import * as auth from '../utils/auth';
 import { useHistory } from 'react-router';
 
-function Login({handleLogin}) {
+function Login({ handleLogin }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,32 +11,34 @@ function Login({handleLogin}) {
     function handleChangeEmail(e) {
         setEmail(e.target.value);
     }
-    
+
     function handleChangePassword(e) {
         setPassword(e.target.value);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (!email || !password) {
+            return;
+        }
         auth.authorize(password, email)
-          .then((data) => {
-            console.log(data)
-                if (data.token){                
-                console.log(data.token);
+            .then((data) => {
+                // console.log(data)
+                if (data.token) {
+                    // console.log(data.token);
                     handleLogin();
-                history.push('/main');
-            }  
-          })
-          .catch(err => console.log(err));
-        
+                    history.push('/main');
+                }
+            })
+            .catch(err => console.log(err));
     }
 
     return (
-        <div className="start-page">            
-                <p className="start-page__title">
-                    Вход
-                </p>
-                <form onSubmit={handleSubmit} className="start-page__form">
+        <div className="start-page">
+            <p className="start-page__title">
+                Вход
+            </p>
+            <form onSubmit={handleSubmit} className="start-page__form start-page__form_place-login" noValidate>
                 <input placeholder="Email"
                     name="emailInput"
                     onChange={handleChangeEmail}

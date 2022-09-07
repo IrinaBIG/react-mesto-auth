@@ -4,19 +4,14 @@ export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
         headers: {
+            // 'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ password, email })
     })
-    .then((res) => {
-        return res.json();
-      })
-        // .then((res) => {
-        //     if (res.ok) {
-        //         return res.json();
-        //     }
-        //     return Promise.reject(`Возникла ошибка: ${res.status}`);
-        // })
+        .then((response) => {
+            return response.json();
+        })
         .then((res) => {
             console.log(res)
             return res;
@@ -26,38 +21,31 @@ export const register = (password, email) => {
 
 export const authorize = (password, email) => {
     return fetch(`${BASE_URL}/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ password, email })
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password, email })
     })
-    .then((response => response.json()))
-    // .then((res) => {
-    //     if (res.ok) {
-    //         return res.json();
-    //     }
-    //     return Promise.reject(`Возникла ошибка: ${res.status}`);
-    // })
-    .then((data) => {
-        console.log(data)
-        
-      if (data.token){
-        localStorage.setItem('token', data.token);
-        return data;
-      } 
-    })
-    .catch(err => console.log(err))
-  };
+        .then((response => response.json()))
+        .then((data) => {
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                return data;
+            }
+        })
+        .catch(err => console.log(err))
+};
 
-  export const getContent = (token) => {
+export const getContent = (token) => {
     return fetch(`${BASE_URL}/users/me`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      }
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            // 'Authorization': `Bearer ${localStorage.getItem('token')}`,            
+        }
     })
-    .then(res => res.json())
-    .then(data => data)
-  }
+        .then(res => res.json())
+        .then(data => data)
+}

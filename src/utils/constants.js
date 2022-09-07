@@ -15,3 +15,9 @@ export const editAvatarStartingValues = {
     errValues: { avatarPlace: '' },
     errStates: { avatarPlace: false }
 }
+
+export const registerStartingValues = {
+    inputValues: { emailInput: '', passwordInput: '' },
+    errValues: { emailInput: '', passwordInput: '' },
+    errStates: { emailInput: false, passwordInput: false }
+}

@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as auth from '../utils/auth';
-import Login from "./Login";
 import { useHistory } from 'react-router';
 
-
-function Register({onTooltipPlace}) {
+function Register({ onTooltipPlace, setIfRegOk }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,25 +17,30 @@ function Register({onTooltipPlace}) {
         setPassword(e.target.value);
     }
 
+    function handleClickRegister() {
+        onTooltipPlace();
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        if (password) {
+        if (password, email) {
             auth.register(password, email)
-            .then((res) => {
-                if(res){
-                    console.log(res);
-                    history.push('/sign-in');
-                } else {
-                    alert("sorry")
-                }
+                .then((res) => {
+                    if (res.data) {
+                        // console.log(res);
+                        setIfRegOk(true);
+                        handleClickRegister();
+                        history.push('/sign-in');
+                    } else {
+                        handleClickRegister();
+                    }
                 })
                 .catch((err) => {
                     console.log(err);
                 })
-           
-            }  
+        }
     }
-   
+
     return (
         <div className="start-page">
             <p className="start-page__title">
@@ -58,7 +61,8 @@ function Register({onTooltipPlace}) {
                     type="password"
                     className="start-page__input"
                     value={password}
-                    required />
+                    required
+                />
                 <button type="submit" className="start-page__button">Зарегистрироваться</button>
             </form>
             <div className="start-page__signin">
@@ -66,7 +70,7 @@ function Register({onTooltipPlace}) {
                 <Link to="/sign-in" className="start-page__register-link">Войти</Link>
             </div>
         </div>
-    ); 
+    );
 }
 
 export default Register;

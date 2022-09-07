@@ -28,7 +28,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [removeCard, setRemoveCard] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  // const [email, setEmail] = useState('');
+  const [ifRegOk, setIfRegOk] = useState(false);
+  const [email, setEmail] = useState('');
   const [isTooltipPopupOpen, setIsTooltipPopupOpen] = useState(false);
   const history = useHistory();
 
@@ -95,7 +96,6 @@ function App() {
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some(item => item._id === currentUser._id);
-
     // Отправляем запрос в API и получаем обновлённые данные карточки
     api.toggleLike(card._id, isLiked)
       .then((newCard) => {
@@ -128,6 +128,7 @@ function App() {
         console.log(err);
       })
   }
+
   function handleAddPlaceSubmit(data) {
     api.addCard(data)
       .then((res) => {
@@ -145,11 +146,11 @@ function App() {
     setIsAddPlacePopupOpen(false)
     setIsPopupWithConfirmation(false)
     setSelectedCard({ isOpen: false, card: {} })
+    setIsTooltipPopupOpen(false)
   }
 
   function handleLogin() {
     setLoggedIn(true);
-
   }
 
   useEffect(() => {
@@ -166,14 +167,13 @@ function App() {
   useEffect(() => {
     // если у пользователя есть токен в localStorage, 
     // эта функция проверит, действующий он или нет
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
+    const jwt = localStorage.getItem('token');
+    if (jwt) {
       // здесь будем проверять токен
-      auth.getContent(token).then((res) => {
+      auth.getContent(jwt).then((res) => {
         if (res) {
-          console.log(res)
-          const email = { email: res.email }
-          console.log(email)
+          const email = (res.data.email);
+          setEmail(email);
           handleLogin();
           history.push("/");
         }
@@ -182,13 +182,19 @@ function App() {
   });
 
   return (
+
     <CurrentUserContext.Provider value={currentUser}>
+
       <div className="body">
+
         <div className="page">
-          <Header />,
+          <Header
+            email={email}
+          />
+
           <Switch>
             <ProtectedRoute
-              path="/main"
+              exact path="/main"
               loggedIn={loggedIn}
               component={Main}
               onEditAvatar={handleEditAvatarClick}
@@ -200,10 +206,13 @@ function App() {
               onCardLike={handleCardLike}
               cards={cards}
             />
+
             <Route path="/sign-up">
               <div className="">
                 <Register
-
+                  onTooltipPlace={handleTooltipPlaceClick}
+                  handleLogin={handleLogin}
+                  setIfRegOk={setIfRegOk}
                 />
               </div>
             </Route>
@@ -211,15 +220,16 @@ function App() {
             <Route path="/sign-in">
               <div className="">
                 <Login handleLogin={handleLogin} />
-                {/* <Login LoggedIn={loggedIn} handleLogin={handleLogin}/> */}
               </div>
             </Route>
+
             <Route exact path="/">
               {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
             </Route>
 
           </Switch>
-          <Footer />,
+
+          <Footer />
 
           <EditAvatarPopup
             isOpen={isEditAvatarPopupOpen}
@@ -255,6 +265,7 @@ function App() {
             isOpen={isTooltipPopupOpen}
             isClose={closeAllPopups}
             onTooltipPlace={handleTooltipPlaceClick}
+            ifRegOk={ifRegOk}
           />
         </div>
       </div>

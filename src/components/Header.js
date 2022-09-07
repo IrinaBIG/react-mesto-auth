@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import headerLogo from '../images/Vector.svg';
-import { Link, Route, Switch } from 'react-router-dom';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
-function Header() {
-    // let { username, email} = props.userData;
-    const currentUser = useContext(CurrentUserContext);
+function Header({ email }) {
+
+    const history = useHistory();
+
+    function onSignOut() {
+        localStorage.removeItem('token');
+        history.push('/sign-in');
+    }
 
     return (
         <div className="header">
@@ -24,13 +28,14 @@ function Header() {
                     </Link>
                 </Route>
 
-                <Route path="/main">
+                <Route path="/">
                     <div className="header__user-data">
-                        {currentUser.email}
+                        {email}
                     </div>
-                    <Link to="/sign-in" className="header__link">
+
+                    <button className="header__link-exit" onClick={onSignOut} type="button">
                         Выйти
-                    </Link>
+                    </button>
                 </Route>
 
             </Switch>
