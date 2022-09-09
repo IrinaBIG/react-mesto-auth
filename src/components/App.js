@@ -55,25 +55,6 @@ function App() {
     }
   }, [isOpen]);
 
-  // useEffect(() => {
-  //   if (
-  //     isEditAvatarPopupOpen ||
-  //     isEditProfilePopupOpen ||
-  //     isAddPlacePopupOpen ||
-  //     isTooltipPopupOpen ||
-  //     selectedCard ||
-  //     isPopupWithConfirmation) {
-  //     function handleCloseEsc(e) {
-  //       if (e.key === 'Escape') {
-  //         closeAllPopups(); }
-  //     }
-  //     document.addEventListener('keydown', handleCloseEsc);
-  //     return () => {
-  //       document.removeEventListener('keydown', handleCloseEsc);
-  //     };
-  //   }
-  // }, []);
-
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
   }
@@ -137,7 +118,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=> {
+      .finally(() => {
         setIsLoading(false);
       })
   }
@@ -153,7 +134,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=> {
+      .finally(() => {
         setIsLoading(false);
       })
   }
@@ -168,7 +149,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(()=> {
+      .finally(() => {
         setIsLoading(false);
       })
   }
@@ -237,15 +218,15 @@ function App() {
     if (jwt) {
       // здесь будем проверять токен
       auth.checkToken(jwt)
-      .then((res) => {
-        if (res) {
-          console.log(res)
-          const email = (res.data.email);
-          setEmail(email);
-          setLoggedIn(true);
-          history.push("/");
-        }
-      })
+        .then((res) => {
+          if (res) {
+            console.log(res)
+            const email = (res.data.email);
+            setEmail(email);
+            setLoggedIn(true);
+            history.push("/");
+          }
+        })
         .catch((err) => {
           console.log(err);
         })
@@ -277,10 +258,7 @@ function App() {
 
             <Route path="/sign-up">
               <Register
-                // onTooltipPlace={handleTooltipPlaceClick}
                 handleRegister={handleRegister}
-              // setIfRegOk={setIfRegOk}
-              // password={password}
               />
             </Route>
 
@@ -332,7 +310,6 @@ function App() {
           <InfoToolTip
             isOpen={isTooltipPopupOpen}
             onClose={closeAllPopups}
-            // onTooltipPlace={handleTooltipPlaceClick}
             ifRegOk={ifRegOk}
           />
         </div>

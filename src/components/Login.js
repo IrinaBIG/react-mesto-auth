@@ -1,12 +1,9 @@
 import { useState } from 'react';
-// import * as auth from '../utils/auth';
-// import { useHistory } from 'react-router';
 
 function Login({ handleLogin }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const history = useHistory();
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
@@ -20,23 +17,6 @@ function Login({ handleLogin }) {
         e.preventDefault();
         handleLogin(password, email);
     }
-
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     if (!email || !password) {
-    //         return;
-    //     }
-    //     auth.authorize(password, email)
-    //         .then((data) => {
-    //             // console.log(data)
-    //             if (data.token) {
-    //                 // console.log(data.token);
-    //                 handleLogin();
-    //                 history.push('/main');
-    //             }
-    //         })
-    //         .catch(err => console.log(err));
-    // }
 
     return (
         <div className="start-page">

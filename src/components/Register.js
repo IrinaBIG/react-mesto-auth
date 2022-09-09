@@ -1,13 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as auth from '../utils/auth';
-import { useHistory } from 'react-router';
 
-function Register({ onTooltipPlace, setIfRegOk, handleRegister }) {
+function Register({ handleRegister }) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
 
     function handleChangeEmail(e) {
         setEmail(e.target.value);
@@ -17,58 +14,10 @@ function Register({ onTooltipPlace, setIfRegOk, handleRegister }) {
         setPassword(e.target.value);
     }
 
-    // function handleClickRegister() {
-    //     onTooltipPlace();
-    // }
-
     function handleSubmit(e) {
         e.preventDefault();
         handleRegister(password, email);
     }
-    // function handleClickRegister() {
-    //     onTooltipPlace();
-    // }
-
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     if (password, email) {
-    //         auth.register(password, email)
-    //             .then((res) => {
-    //                 if (res.data) {
-    //                     // console.log(res);
-    //                     setIfRegOk(true);
-    //                     history.push('/sign-in');
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 setIfRegOk(false);
-    //                 console.log(err);
-    //             })
-    //             .finally(() => {
-    //                 handleClickRegister();
-    //             })
-    //     }
-    // }
-    
-    // function handleSubmit(e) {
-    //     e.preventDefault();
-    //     if (password, email) {
-    //         auth.register(password, email)
-    //             .then((res) => {
-    //                 if (res.data) {
-    //                     // console.log(res);
-    //                     setIfRegOk(true);
-    //                     handleClickRegister();
-    //                     history.push('/sign-in');
-    //                 } else {
-    //                     handleClickRegister();
-    //                 }
-    //             })
-    //             .catch((err) => {
-    //                 console.log(err);
-    //             })
-    //     }
-    // }
 
     return (
         <div className="start-page">
