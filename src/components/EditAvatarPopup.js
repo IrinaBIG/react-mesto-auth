@@ -6,7 +6,7 @@ import { editAvatarStartingValues } from '../utils/constants';
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
 
     const avatarRef = useRef();
-    const { values, handleChange, errors, setValues, setIsValid, isValid, resetForm } 
+    const { values, handleChange, errors, setValues, isValid, resetForm } 
     = useFormAndValidation(editAvatarStartingValues)
 
     function handleSubmit(e) {
@@ -18,7 +18,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
         if (isOpen) {
             resetForm();
             setValues({ avatarPlace: '' });
-            
         }
     }, [isOpen]);
 
