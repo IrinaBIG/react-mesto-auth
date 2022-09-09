@@ -16,8 +16,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
 
     useEffect(() => {
         if (isOpen) {
-            setIsValid(false);
-            // resetForm(isValid);
+            resetForm();
             setValues({ avatarPlace: '' });
             
         }

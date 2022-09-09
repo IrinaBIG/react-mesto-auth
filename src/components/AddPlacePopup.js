@@ -15,8 +15,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
 
     useEffect(() => {
         if (isOpen) {
+            resetForm();
             setValues({ newPlace: '', linkPlace: '' });
-            // resetForm();
         }
     }, [isOpen]);
 
