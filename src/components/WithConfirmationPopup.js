@@ -1,6 +1,6 @@
 import PopupWithForm from './PopupWithForm';
 
-function WithConfirmationPopup({ isOpen, isClose, onSubmit }) {
+function WithConfirmationPopup({ isOpen, onClose, onSubmit, isLoading }) {
 
     function handleSubmit(card) {
         onSubmit(card);
@@ -10,11 +10,11 @@ function WithConfirmationPopup({ isOpen, isClose, onSubmit }) {
         <PopupWithForm
             name="popup_confirmation"
             title="Вы уверены?"
+            buttonText={isLoading ? 'Удаление...' : 'Да'}
             isOpen={isOpen}
-            isClose={isClose}
+            onClose={onClose}
             onSubmit={handleSubmit}
         >
-            <button type="submit" className="form__button" name="save" aria-label="Да">Да</button>
         </PopupWithForm>
     );
 }
