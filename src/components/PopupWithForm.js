@@ -12,7 +12,7 @@ function PopupWithForm({ name, title, children, isOpen, onClose, onSubmit, butto
                 <form className="form" name={name} onSubmit={onSubmit} noValidate>
                     {children}
                     <button type="submit" className={`form__button ${isDisabled ? 'form__button_disabled' : ''}`}
-                        name="save" aria-label="{buttonText}">{buttonText}</button>
+                        name="save" aria-label="{buttonText}" disabled={isDisabled}>{buttonText}</button>
                 </form>
             </div>
         </div>

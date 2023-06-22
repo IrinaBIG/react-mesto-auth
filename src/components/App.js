@@ -204,6 +204,7 @@ function App() {
     Promise.all([api.getUser(), api.getCards()])
       .then(([profile, cards]) => {
         setCurrentUser(profile);
+        console.log(profile);
         setCards(cards);
       })
       .catch((err) => {
