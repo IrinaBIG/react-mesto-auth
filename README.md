@@ -1,6 +1,6 @@
-Ссылка на проектную работу: <https://irinabig.github.io/mesto/index.html>
+Ссылка на проектную работу: <https://irinabig.github.io/react-mesto-auth/index.html>
 
-в GitHube <https://github.com/IrinaBIG/mesto.git>
+в GitHube <https://github.com/IrinaBIG/react-mesto-auth.git>
 
 **Проектная работа № 12 Регистрация и авторизация в проект Mesto на «Реакте»**
 
